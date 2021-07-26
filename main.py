@@ -15,7 +15,6 @@ async def on_ready():
     #channel1 = client.get_channel(818536388567236638)
     #await channel1.send("The bot is now active!")
 
-
 @client.command()
 async def pronouns(ctx, pronouns):
     message = ctx.message.content
