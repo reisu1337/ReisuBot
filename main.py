@@ -1,4 +1,4 @@
-from discord import client, guild
+from discord import channel, client, guild
 from dotenv import load_dotenv
 import os
 import discord
@@ -6,6 +6,15 @@ from discord.ext import commands
 from discord.utils import get
 
 client = commands.Bot(command_prefix="!")
+
+@client.event
+async def on_ready():
+    print("Bot active")
+    activity = discord.Game(name="Was Einstein's theory good? Relatively.", type=3)
+    await client.change_presence(activity=activity)
+    #channel1 = client.get_channel(818536388567236638)
+    #await channel1.send("The bot is now active!")
+
 
 @client.command()
 async def pronouns(ctx, pronouns):
@@ -31,7 +40,9 @@ async def addPronouns(ctx, pronouns):
         await ctx.guild.create_role(name=pronouns)
         await ctx.send(f"Pronouns \"{pronouns}\" have been added!")
 
-
+@client.command()
+async def test(ctx):
+    await ctx.send("This is a test")
 
 
 
