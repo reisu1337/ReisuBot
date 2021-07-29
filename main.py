@@ -45,6 +45,8 @@ async def test(ctx):
 
 
 
+my_secret = os.environ['TOKEN']
+client.run(my_secret)
 
-load_dotenv(".env")
-client.run(os.getenv("TOKEN"))
+#load_dotenv(".env")
+#client.run(os.getenv("TOKEN"))
