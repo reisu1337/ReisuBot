@@ -6,7 +6,6 @@ from discord.ext import commands
 from discord.utils import get
 
 client = commands.Bot(command_prefix="!")
-client.remove_command("help")
 
 @client.event
 async def on_ready():
@@ -44,14 +43,7 @@ async def addPronouns(ctx, pronouns):
 async def test(ctx):
     await ctx.send("This is a test")
 
-@client.command()
-async def help(ctx):
-  embed = discord.Embed(
-    title = "Help",
-    description = "The help module for the ReisuBot",
-    colour = discord.Colour.red()
-  )
-  async client.say(embed=embed)
+
 
 my_secret = os.environ['TOKEN']
 client.run(my_secret)
