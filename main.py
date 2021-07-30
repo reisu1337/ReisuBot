@@ -1,19 +1,35 @@
 from discord import channel, client, guild
 from dotenv import load_dotenv
 import os
+import json
 import discord
-from discord.ext import commands
+import requests
+from twitchAPI.twitch import Twitch
+from discord.ext import commands, tasks
 from discord.utils import get
 
-client = commands.Bot(command_prefix="!")
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix="!", intents=intents)
+
+#twitch auth
+client_id = os.environ['CLIENT_ID']
+client_secret = os.environ['CLIENT_SECRET']
+twitch = Twitch(client_id, client_secret)
+twitch.authenticate_app([])
+TWITCH_STREAM_API_ENDPOINT_V5 = "https://api.twitch.tv/kraken/streams/{}"
+API_HEADERS = {
+    'Client-ID': client_id,
+    'Accept': 'application/vnd.twitchtv.v5+json',
+}
+
+
 
 @client.event
 async def on_ready():
     print("Bot active")
     activity = discord.Game(name="Was Einstein's theory good? Relatively.", type=3)
     await client.change_presence(activity=activity)
-    #channel1 = client.get_channel(818536388567236638)
-    #await channel1.send("The bot is now active!")
+
 
 @client.command()
 async def pronouns(ctx, pronouns):
@@ -35,15 +51,24 @@ async def pronouns(ctx, pronouns):
 async def addPronouns(ctx, pronouns):
     if get(ctx.guild.roles, name=pronouns):
         await ctx.send("Pronouns are already available!")
+    elif "/" not in pronouns:
+      await ctx.send("Make sure the pronouns are formatted as \"a/b\"!")
     else:
         await ctx.guild.create_role(name=pronouns)
         await ctx.send(f"Pronouns \"{pronouns}\" have been added!")
 
 @client.command()
-async def test(ctx):
-    await ctx.send("This is a test")
+async def pronounList(ctx):
+  pronouns = "Pronouns available are:\n"
+  for i in ctx.guild.roles:
+    if "/" in i.name:
+      pronouns= pronouns+(i.name)+"\n"
+  await ctx.send(f"```{pronouns}```")
 
-
+@client.command()
+async def ping(ctx):
+    await ctx.send("Pong!")
+    print("pang")
 
 my_secret = os.environ['TOKEN']
 client.run(my_secret)
