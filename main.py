@@ -36,7 +36,7 @@ def isLive(username):
     }
 
     r1 = requests.post(url=URL, params=PARAMS)
-
+    print(r1.json())
     token = r1.json()["access_token"]
 
     URL2 = "https://api.twitch.tv/helix/search/channels?query=" + username
@@ -87,8 +87,7 @@ async def liveLoop(ctx, username):
 @client.event
 async def on_ready():
     print("Bot active")
-    activity = discord.Game(name="Was Einstein's theory good? Relatively.",
-                            type=3)
+    activity = discord.Game(name="Was Einstein's theory good? Relatively.", type=3)
     await client.change_presence(activity=activity)
 
 
@@ -108,6 +107,12 @@ async def pronouns(ctx, pronouns):
             )
     else:
         await ctx.send("Make sure your pronouns are formatted as \"a/b\"!")
+
+@client.command()
+async def hi(ctx):
+	user = ctx.message.author
+	await ctx.send(f"Hello, {user.mention}")
+
 
 
 @client.command()
