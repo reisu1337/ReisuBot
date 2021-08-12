@@ -36,7 +36,6 @@ def isLive(username):
     }
 
     r1 = requests.post(url=URL, params=PARAMS)
-    print(r1.json())
     token = r1.json()["access_token"]
 
     URL2 = "https://api.twitch.tv/helix/search/channels?query=" + username
