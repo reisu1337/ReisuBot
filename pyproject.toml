@@ -8,6 +8,7 @@ authors = ["reisu1337 <<>>"]
 python = "^3.8"
 discord = "^1.7.3"
 python-dotenv = "^0.19.0"
+twitchAPI = "^2.3.2"
 
 [tool.poetry.dev-dependencies]
 
