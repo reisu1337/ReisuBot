@@ -6,6 +6,7 @@ import asyncio
 from twitchAPI.twitch import Twitch
 from discord.ext import commands
 from discord.utils import get
+import random
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix="$", intents=intents)
@@ -103,11 +104,18 @@ async def pronouns(ctx, pronouns1):
         await ctx.send("Make sure your pronouns are formatted as \"a/b\"!")
 
 
-# noinspection PyPep8Naming
 @client.command()
-async def hi(ctx):
+async def createTicket(ctx, ticketname):
     user = ctx.message.author
-    await ctx.send(f"Hello, {user.mention}")
+    guild = ctx.guild
+    channelName = user+" "+random.randint(1, 9999)
+    reisu = guild.get_member(284014364745531394)
+    category1 = discord.utils.get(user.guild.categories, name="❓SUPPORT❓")
+    await guild.create_channel(channelName, category=category1)
+    newChannel = discord.utils.get(guild.channels, name=channelName)
+    await newChannel.set_permissions(guild.default_role, read=False)
+    await newChannel.set_permissions(user, read=True)
+    await ctx.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
 
 
 @client.command()
