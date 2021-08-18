@@ -111,10 +111,9 @@ async def createTicket(ctx, ticketname):
     channelName = str(user)+" "+str(random.randint(1, 9999))
     reisu = guild.get_member(284014364745531394)
     category1 = discord.utils.get(user.guild.categories, name="❓SUPPORT❓")
-    await guild.create_text_channel(channelName, category=category1)
-    newChannel = discord.utils.get(guild.channels, name=channelName)
-    await newChannel.set_permissions(guild.default_role, read=False)
-    await newChannel.set_permissions(user, read=True)
+    channel = await guild.create_text_channel(channelName, category=category1)
+    await channel.set_permissions(guild.default_role, read=False)
+    await channel.set_permissions(user, read=True)
     await ctx.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
 
 
