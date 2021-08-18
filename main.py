@@ -7,6 +7,7 @@ from twitchAPI.twitch import Twitch
 from discord.ext import commands
 from discord.utils import get
 import random
+import re
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix="$", intents=intents)
@@ -116,6 +117,12 @@ async def createTicket(ctx, ticketname):
     await channel.set_permissions(user, view_channel=True)
     await channel.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
     await ctx.message.delete()
+
+@client.command()
+async def closeTicket(ctx):
+    channel= ctx.message.channel
+    if bool(re.match("[a-z]+\d{4}-\d{1,4}", channel.name)):
+        channel.delete(channel)
 
 
 @client.command()
