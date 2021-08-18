@@ -115,7 +115,7 @@ async def createTicket(ctx, ticketname):
     await channel.set_permissions(guild.default_role, view_channel=False)
     await channel.set_permissions(user, view_channel=True)
     await channel.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
-    await message.delete(ctx.message)
+    await ctx.message.delete()
 
 
 @client.command()
