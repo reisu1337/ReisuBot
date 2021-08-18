@@ -108,7 +108,7 @@ async def pronouns(ctx, pronouns1):
 async def createTicket(ctx, ticketname):
     user = ctx.message.author
     guild = ctx.guild
-    channelName = user+" "+random.randint(1, 9999)
+    channelName = str(user)+" "+str(random.randint(1, 9999))
     reisu = guild.get_member(284014364745531394)
     category1 = discord.utils.get(user.guild.categories, name="❓SUPPORT❓")
     await guild.create_channel(channelName, category=category1)
