@@ -114,7 +114,7 @@ async def createTicket(ctx, ticketname):
     channel = await guild.create_text_channel(channelName, category=category1)
     await channel.set_permissions(guild.default_role, view_channel=False)
     await channel.set_permissions(user, view_channel=True)
-    await ctx.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
+    await channel.send(f"{reisu.mention} New Ticket, opened by {user.mention} - {ticketname}")
 
 
 @client.command()
