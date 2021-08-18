@@ -122,7 +122,7 @@ async def createTicket(ctx, ticketname):
 async def closeTicket(ctx):
     channel= ctx.message.channel
     if bool(re.match("[a-z]+\d{4}-\d{1,4}", channel.name)):
-        channel.delete(channel)
+        await channel.delete()
 
 
 @client.command()
