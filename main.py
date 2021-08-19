@@ -155,5 +155,10 @@ async def ping(ctx):
 my_secret = os.environ['TOKEN']
 client.run(my_secret)
 
-# load_dotenv(".env")
-# client.run(os.getenv("TOKEN"))
+"""
+ __ __ __
+|YY|OO|BB|
+|RR|WW|RR|
+|WW|BB|GG|
+ ‾‾ ‾‾ ‾‾
+ """
