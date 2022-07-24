@@ -14,4 +14,9 @@ async def on_ready():
 async def hello(ctx):
     await ctx.respond("Hey!")
 
+#CSGO Stats Command
+#@bot.slash_command(name="csgostats", description="Returns some fun CSGO stats!")
+#async def csgostats
+
+@bot.slash_command
 bot.run(os.getenv('TOKEN'))
